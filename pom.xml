@@ -61,34 +61,7 @@
          <url>dav:http://192.168.1.8:8081/nexus/content/repositories/snapshots</url>
       </snapshotRepository>
    </distributionManagement>
-   <!-- download artifacts from this repo -->
-   <repositories>
-      <repository>
-         <id>public</id>
-         <name>Public Repositories</name>
-         <url>http://http://192.168.1.8:8081/nexus/content/groups/public</url>
-         <releases>
-            <enabled>true</enabled>
-         </releases>
-         <snapshots>
-            <enabled>true</enabled>
-         </snapshots>
-      </repository>
-   </repositories>
-   <!-- download plugins from this repo -->
-   <pluginRepositories>
-      <pluginRepository>
-         <id>public</id>
-         <name>Public Repositories</name>
-         <url>http://http://192.168.1.8:8081/nexus/content/groups/public</url>
-         <releases>
-            <enabled>true</enabled>
-         </releases>
-         <snapshots>
-            <enabled>true</enabled>
-         </snapshots>
-      </pluginRepository>
-   </pluginRepositories>
+
    <dependencyManagement />
    <dependencies>
       <!-- Import the Servlet API, we use provided scope as the API is included in JBoss WildFly -->
