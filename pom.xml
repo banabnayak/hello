@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
@@ -16,88 +16,111 @@
     limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.wildfly.quickstarts</groupId>
-    <artifactId>wildfly-helloworld</artifactId>
-    <version>8.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>WildFly Quickstarts: Helloworld</name>
-    <description>WildFly Quickstarts: Helloworld</description>
-
-    <url>http://wildfly.org</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-        </license>
-    </licenses>
-
-    <properties>
-        <!-- Explicitly declaring the source encoding eliminates the following 
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.wildfly.quickstarts</groupId>
+   <artifactId>wildfly-helloworld</artifactId>
+   <version>8.0.0-SNAPSHOT</version>
+   <packaging>war</packaging>
+   <name>WildFly Quickstarts: Helloworld</name>
+   <description>WildFly Quickstarts: Helloworld</description>
+   <url>http://wildfly.org</url>
+   <licenses>
+      <license>
+         <name>Apache License, Version 2.0</name>
+         <distribution>repo</distribution>
+         <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      </license>
+   </licenses>
+   <properties>
+      <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
-        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+      <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
             resources, i.e. build is platform dependent! -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- JBoss dependency versions -->
-
-        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
-
-        <version.jboss.spec.javaee.7.0>1.0.0.Final</version.jboss.spec.javaee.7.0>
-
-
-        <!-- other plugin versions -->
-        <version.compiler.plugin>3.1</version.compiler.plugin>
-        <version.war.plugin>2.1.1</version.war.plugin>
-
-        <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
-    </properties>
-
-    <dependencyManagement>
-        
-    </dependencyManagement>
-
-    <dependencies>
-
-        
-        <!-- Import the Servlet API, we use provided scope as the API is included in JBoss WildFly -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.servlet</groupId>
-            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
-			<version>1.0.0.Final</version>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-        <!-- Set the name of the war, used as the context root when the app 
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <!-- JBoss dependency versions -->
+      <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+      <version.jboss.spec.javaee.7.0>1.0.0.Final</version.jboss.spec.javaee.7.0>
+      <!-- other plugin versions -->
+      <version.compiler.plugin>3.1</version.compiler.plugin>
+      <version.war.plugin>2.1.1</version.war.plugin>
+      <!-- maven-compiler-plugin -->
+      <maven.compiler.target>1.7</maven.compiler.target>
+      <maven.compiler.source>1.7</maven.compiler.source>
+   </properties>
+   <distributionManagement>
+      <!-- Publish the versioned releases here -->
+      <repository>
+         <id>releases</id>
+         <name>Releases</name>
+         <url>dav:http://192.168.1.8:8081/nexus/content/repositories/releases</url>
+      </repository>
+      <!-- Publish the versioned releases here -->
+      <snapshotRepository>
+         <id>snapshots</id>
+         <name>Snapshots</name>
+         <url>dav:http://192.168.1.8:8081/nexus/content/repositories/snapshots</url>
+      </snapshotRepository>
+   </distributionManagement>
+   <!-- download artifacts from this repo -->
+   <repositories>
+      <repository>
+         <id>public</id>
+         <name>Public Repositories</name>
+         <url>http://http://192.168.1.8:8081/nexus/content/groups/public</url>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+      </repository>
+   </repositories>
+   <!-- download plugins from this repo -->
+   <pluginRepositories>
+      <pluginRepository>
+         <id>public</id>
+         <name>Public Repositories</name>
+         <url>http://http://192.168.1.8:8081/nexus/content/groups/public</url>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+      </pluginRepository>
+   </pluginRepositories>
+   <dependencyManagement />
+   <dependencies>
+      <!-- Import the Servlet API, we use provided scope as the API is included in JBoss WildFly -->
+      <dependency>
+         <groupId>org.jboss.spec.javax.servlet</groupId>
+         <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+         <version>1.0.0.Final</version>
+      </dependency>
+   </dependencies>
+   <build>
+      <!-- Set the name of the war, used as the context root when the app 
             is deployed -->
-        <finalName>hello</finalName>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
-                <configuration>
-                    <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-         
-            <!-- Compiler plugin enforces Java 1.6 compatibility and activates 
+      <finalName>hello</finalName>
+      <plugins>
+         <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>${version.war.plugin}</version>
+            <configuration>
+               <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
+               <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+         </plugin>
+         <!-- Compiler plugin enforces Java 1.6 compatibility and activates 
                 annotation processors -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${version.compiler.plugin}</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${version.compiler.plugin}</version>
+            <configuration>
+               <source>${maven.compiler.source}</source>
+               <target>${maven.compiler.target}</target>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 </project>
