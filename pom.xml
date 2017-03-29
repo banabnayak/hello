@@ -50,13 +50,13 @@
    <distributionManagement>
       <!-- Publish the versioned releases here -->
       <repository>
-         <id>madhu</id>
+         <id>releases</id>
          <name>Releases</name>
          <url>dav:http://192.168.1.8:8081/nexus/content/repositories/releases</url>
       </repository>
       <!-- Publish the versioned releases here -->
       <snapshotRepository>
-         <id>madhu</id>
+         <id>snapshots</id>
          <name>Snapshots</name>
          <url>dav:http://192.168.1.8:8081/nexus/content/repositories/snapshots</url>
       </snapshotRepository>
